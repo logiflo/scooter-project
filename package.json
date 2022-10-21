@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --verbose --collect-coverage",
     "lint": "eslint $(git diff --name-only main | grep -E '.js$' | xargs) --ignore-pattern node_modules/"
   },
   "repository": {
