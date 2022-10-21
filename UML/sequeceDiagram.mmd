@@ -25,6 +25,8 @@ sequenceDiagram
         Scooter ->> ScooterApp: Cancel rent
         ScooterApp ->> Scooter: requestRepair()
         Scooter ->> ScooterApp: Confirm repair
+    else scooter is not located
+        Scooter ->> ScooterApp: Cancel rent
     else Scooter undocked successfully
         Scooter ->> ScooterApp: undock confirmed
     activate Scooter
@@ -32,6 +34,17 @@ sequenceDiagram
     ScooterApp ->> User: Inform about the rent status
 
     User ->> ScooterApp: addScooter
-    ScooterApp ->> Scooter: dock in a location
-    deactivate Scooter
-    ScooterApp ->> User: Inform about the dock status
+    alt location or/and scooter not provided
+        ScooterApp ->> User: Cancel
+    else location is not valid
+        ScooterApp ->> User: Cancel
+    else scooter be added
+        ScooterApp ->> Scooter: dock in a location
+        deactivate Scooter
+        ScooterApp ->> User: Inform about the dock status
+    end
+
+    User ->> ScooterApp: set scooter as broken
+    ScooterApp ->> Scooter: scooter is broken
+    Scooter ->> ScooterApp: confirm scooter is set as broken
+    ScooterApp ->> User: confirm scooter is set as broken
