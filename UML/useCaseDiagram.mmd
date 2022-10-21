@@ -10,5 +10,8 @@ flowchart LR
 
     subgraph Scooter
     removeScooter --> UndockScooter
+    UndockScooter --> requestRepair
+    UndockScooter --> recharge
+    UndockScooter --> confirmUndock
     addScooter --> DockScooter
     end
